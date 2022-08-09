@@ -1,0 +1,42 @@
+.header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	background-color: beige;
+	margin-bottom: 0.5rem;
+}
+
+.main-content {
+	display: flex;
+}
+
+.quiz-elements {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	gap: 2rem;
+}
+
+/* div containing the staff images */
+.staff-images {
+	/* min-width: 200px; */
+}
+
+/* div containing note buttons */
+.note-buttons {
+	/* these don't do anything: */
+	/* display: flex; */
+	/* flex-wrap: wrap; */
+}
+
+.staff-image {
+	width: 100%;
+	/* max-height: auto; */
+}
+
+/* div containing the note buttons */
+.note-buttons button {
+	font-size: 2rem;
+	min-width: 100px;
+	margin: 0.5rem;
+}
