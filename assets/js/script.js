@@ -12,6 +12,9 @@ noteArray.forEach((note) => {
 	// make button text content equal to a note from noteArray
 });
 
-const 
+// TIMER
+const timerEl = document.querySelector(".timerEl");
+const timer = document.getElementById("timer");
 
-let time = 60;
+let startingTime = 60;
+timer.innerText = startingTime;
