@@ -2,7 +2,7 @@
 <svg width="14.8167mm" height="18.6972mm"
  viewBox="0 0 42 53"
  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  version="1.2" baseProfile="tiny">
-<title>E4_treble_clef</title>
+<title>C5_treble_clef</title>
 <desc>Dorico</desc>
 <defs>
 </defs>
@@ -18,18 +18,18 @@ font-family=".AppleSystemUIFont" font-size="13" font-weight="400" font-style="no
 <polyline fill="none" vector-effect="none" points="109.372,160.02 570,160.02 " />
 </g>
 
-<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(0.5,0,0,0.5,29.6186,26.235)"
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(0.5,0,0,0.5,29.6186,13.835)"
 font-family="Petaluma" font-size="40" font-weight="400" font-style="normal" 
 >
 </g>
 
-<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(0.5,0,0,0.5,29.6186,26.235)"
+<g fill="#000000" fill-opacity="1" stroke="none" transform="matrix(0.5,0,0,0.5,29.6186,13.835)"
 font-family="Petaluma" font-size="40" font-weight="400" font-style="normal" 
 >
 <path vector-effect="none" fill-rule="nonzero" d="M15.2,-1.12 C15.08,4.2 10.2,7.2 6.2,7.44 C5,7.52 3.96,6.88 2.84,6.48 L1.72,6 C0.6,5.48 0,4.6 0,3.52 C0,3.2 0.04,2.88 0.16,2.52 C0.92,0.24 1.92,-1.96 3.4,-3.92 C4.72,-5.68 6.92,-6.6 9.08,-6.6 C11.04,-6.6 12.96,-5.88 14.28,-4.4 C15.12,-3.48 15.24,-2.32 15.2,-1.12 M6.88,2.96 C8.2,2.84 9.48,2.44 10.68,1.76 C11.16,1.48 11.52,1.12 11.84,0.64 C12,0.4 12.08,0.16 12.08,-0.08 C12.08,-0.4 11.88,-0.68 11.48,-0.88 C10.44,-1.36 9.52,-2.04 8.36,-2.04 C8.08,-2.04 7.84,-2 7.56,-1.92 C5.76,-1.48 4.36,-0.56 3.36,0.96 C3.24,1.16 3.08,1.4 3.08,1.6 C3.08,1.8 3.2,1.96 3.48,2.08 C4.56,2.48 5.6,2.96 6.88,2.96 "/>
 </g>
 
-<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(0.5,0,0,0.5,29.6186,26.235)"
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(0.5,0,0,0.5,29.6186,13.835)"
 font-family="Petaluma" font-size="40" font-weight="400" font-style="normal" 
 >
 <text fill="#000000" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="0" font-family=".AppleSystemUIFont" font-size="13" font-weight="400" font-style="normal" 

@@ -47,3 +47,19 @@ _Given I am taking a music quiz..._
 -   Repository follows best practices for class/id naming conventions, indentation, high-quality comments, etc.
 -   Repository contains multiple descriptive commit messages.
 -   Repository contains a high-quality README file with description, screenshot, and link to deployed application.
+
+## Questions:
+
+### `setInterval` with `while` loops
+
+Why doesn't this work for decremeting the timer:
+
+```
+function secondCountdown(startingTime) {
+	while (startingTime > 0) {
+		startingTime -= 1;
+		console.log(startingTime);
+		return startingTime;
+	}
+}
+```
