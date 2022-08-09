@@ -1,10 +1,12 @@
 class Note {
 	constructor(
 		name, //
-		image
+		image,
+		clef
 	) {
 		this.name = name;
 		this.image = image;
+		this.clef = clef;
 	}
 }
 

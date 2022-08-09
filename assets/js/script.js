@@ -1,8 +1,16 @@
-const noteArray = ["A", "B", "C", "D", "E", "F", "G"];
+import notesObjectArray from "./noteData.js";
 
 const noteButtonDivEl = document.querySelector(".note-buttons");
+const noteLetters = ["A", "B", "C", "D", "E", "F", "G"];
 
-noteArray.forEach((note) => {
+let noteName = "";
+
+notesObjectArray.forEach((noteObject) => {
+	noteName = noteObject.name;
+	console.log(noteName);
+});
+
+noteLetters.forEach((note) => {
 	// create a button
 	const buttonEl = document.createElement("button");
 	buttonEl.className = "note-button";
@@ -11,6 +19,8 @@ noteArray.forEach((note) => {
 	noteButtonDivEl.appendChild(buttonEl);
 	// make button text content equal to a note from noteArray
 });
+
+//
 
 // TIMER
 const timerEl = document.querySelector(".timerEl");
@@ -24,7 +34,7 @@ const countdown = setInterval(decrementTimer, 1000);
 function decrementTimer() {
 	startingTime -= 1;
 	timerId.innerText = startingTime;
-	console.log(startingTime);
+	// console.log(startingTime);
 
 	if (startingTime < 1) {
 		clearInterval(countdown);
