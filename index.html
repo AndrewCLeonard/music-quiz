@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Note-Reading Game</title>
 		<link rel="stylesheet" href="./assets/css/style.css" />
+		<!-- <script src="https://kit.fontawesome.com/da9be95375.js" crossorigin="anonymous"></script> -->
 		<script type="module" src="./assets/js/Note.js"></script>
 		<script type="module" src="./assets/js/noteData.js"></script>
 		<script type="module" src="./assets/js/script.js"></script>
@@ -16,8 +17,16 @@
 			<div class="timerEl">Time: <span id="timer">0</span></div>
 		</header>
 		<main class="main-content">
+			<!-- QUIZ ELEMENTS -->
 			<div class="quiz-elements">
-				<div class="staff-images"><img src="./assets/images/C4_treble_clef.svg" class="staff-image" alt="" srcset="" /></div>
+				<!-- Start Game -->
+				<div class="hidden-image"><img class="staff-image" src="./assets/images/A3_treble_clef.svg" alt="" srcset="" /></div>
+				<div class="start-game" id="staff-images">
+					<button id="start-game-btn" class="start-game-btn">start</button>
+				</div>
+				<!-- <div class="staff-images"><img src="./assets/images/C4_treble_clef.svg" class="staff-image" alt="" srcset="" /></div> -->
+
+				<!-- Note Buttons -->
 				<div class="note-buttons"></div>
 			</div>
 		</main>

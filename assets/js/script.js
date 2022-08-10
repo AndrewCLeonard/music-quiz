@@ -3,13 +3,6 @@ import notesObjectArray from "./noteData.js";
 const noteButtonDivEl = document.querySelector(".note-buttons");
 const noteLetters = ["A", "B", "C", "D", "E", "F", "G"];
 
-let noteName = "";
-
-notesObjectArray.forEach((noteObject) => {
-	noteName = noteObject.name;
-	console.log(noteName);
-});
-
 noteLetters.forEach((note) => {
 	// create a button
 	const buttonEl = document.createElement("button");
@@ -40,3 +33,5 @@ function decrementTimer() {
 		clearInterval(countdown);
 	}
 }
+
+// START GAME LOGIC
