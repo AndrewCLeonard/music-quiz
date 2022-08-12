@@ -104,6 +104,22 @@ const G5 = new Note(
 	"treble"
 );
 
-const notesObjectArray = [E3, F3, G3, A3, B3, C4, D4, E4, F4, G4, A4, B4, C5, D5, E5, F5, G5];
+const notesObject = {
+	allNotes: [E3, F3, G3, A3, B3, C4, D4, E4, F4, G4, A4, B4, C5, D5, E5, F5, G5],
+	staffNotes: [E4, F4, G4, A4, B4, C5, D5, E5, F5],
+	belowStaffNotes: [C4, D4],
+};
 
-export default notesObjectArray;
+notesObject.allNotes.forEach((note) => {
+	notesObject.allNotes.fullNoteName = note.name + note.octave;
+});
+
+// notesObject.forEach((noteObject) => {
+// 	console.log(noteObject);
+// });
+
+for (const noteObject in notesObject.staffNotes) {
+	console.log(noteObject);
+}
+
+export default notesObject;

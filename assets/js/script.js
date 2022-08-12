@@ -1,4 +1,4 @@
-import notesObjectArray from "./noteData.js";
+import notesObject from "./noteData.js";
 
 const noteButtonDivEl = document.querySelector(".note-buttons");
 const noteLetters = ["A", "B", "C", "D", "E", "F", "G"];
@@ -50,7 +50,7 @@ function timer() {
 		startingTime -= 1;
 		timerId.innerText = startingTime;
 	} else if (startingTime === 0) {
-		console.log("else if")
+		console.log("else if");
 		timerId.innerText = startingTime;
 		clearInterval(countdown);
 	}
@@ -63,7 +63,6 @@ const startGameBtn = document.getElementById("start-game-btn");
 
 function removeStartButton() {
 	startGameBtn.remove();
-
 }
 
 // show pictures for the quiz
