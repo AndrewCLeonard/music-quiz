@@ -3,6 +3,7 @@ import notesObjectArray from "./noteData.js";
 const noteButtonDivEl = document.querySelector(".note-buttons");
 const noteLetters = ["A", "B", "C", "D", "E", "F", "G"];
 
+// create the buttons A through G
 noteLetters.forEach((note) => {
 	// create a button
 	const buttonEl = document.createElement("button");
@@ -13,25 +14,60 @@ noteLetters.forEach((note) => {
 	// make button text content equal to a note from noteArray
 });
 
-//
+/**
+ * HEADER ELEMENTS
+ */
 
-// TIMER
+// "view high scores" element
+const highScoreEl = document.querySelector(".view-high-scores");
+
+// timer elements
+
+// class for the div containing the entire timer
 const timerEl = document.querySelector(".timerEl");
+
+// span containing only the number for the timer
 const timerId = document.getElementById("timer");
+
+/**
+ * TIMER CODE
+ */
 
 let startingTime = 2;
 timerId.innerText = startingTime;
 
-const countdown = setInterval(decrementTimer, 1000);
+// variable to store countdownID, necessary for `clearInterval()`
+let countdown;
 
 function decrementTimer() {
-	startingTime -= 1;
-	timerId.innerText = startingTime;
-	// console.log(startingTime);
+	countdown = setInterval(timer, 1000);
+	removeStartButton();
+}
 
-	if (startingTime < 1) {
+function timer() {
+	if (startingTime >= 1) {
+		console.log(startingTime);
+		startingTime -= 1;
+		timerId.innerText = startingTime;
+	} else if (startingTime === 0) {
+		console.log("else if")
+		timerId.innerText = startingTime;
 		clearInterval(countdown);
 	}
 }
 
 // START GAME LOGIC
+
+// remove start game button from DOM
+const startGameBtn = document.getElementById("start-game-btn");
+
+function removeStartButton() {
+	startGameBtn.remove();
+
+}
+
+// show pictures for the quiz
+
+function startGame() {}
+
+document.getElementById("start-game-btn").addEventListener("click", decrementTimer);

@@ -1,87 +1,105 @@
 import Note from "./Note.js";
 
 const E3 = new Note(
-	"E3", //
+	"E", //
+	3,
 	"../assets/images/E3_treble_clef.svg",
 	"treble"
 );
 const F3 = new Note(
-	"F3", //
+	"F", //
+	3,
 	"../assets/images/F3_treble_clef.svg",
 	"treble"
 );
 const G3 = new Note(
-	"G3", //
+	"G", //
+	3,
 	"../assets/images/G3_treble_clef.svg",
 	"treble"
 );
 const A3 = new Note(
-	"A3", //
+	"A", //
+	3,
 	"../assets/images/A3_treble_clef.svg",
 	"treble"
 );
 const B3 = new Note(
-	"B3", //
+	"B", //
+	3,
 	"../assets/images/B3_treble_clef.svg",
 	"treble"
 );
 const C4 = new Note(
-	"C4", //
+	"C", //
+	4,
 	"../assets/images/C4_treble_clef.svg",
+	5,
 	"treble"
 );
 const D4 = new Note(
-	"D4", //
+	"D", //
+	4,
 	"../assets/images/D4_treble_clef.svg",
 	"treble"
 );
 const E4 = new Note(
-	"E4", //
+	"E", //
+	4,
 	"../assets/images/E4_treble_clef.svg",
 	"treble"
 );
 const F4 = new Note(
-	"F4", //
+	"F", //
+	4,
 	"../assets/images/F4_treble_clef.svg",
 	"treble"
 );
 const G4 = new Note(
-	"G4", //
+	"G", //
+	4,
 	"../assets/images/G4_treble_clef.svg",
 	"treble"
 );
 const A4 = new Note(
-	"A4", //
+	"A", //
+	4,
 	"../assets/images/A4_treble_clef.svg",
 	"treble"
 );
 const B4 = new Note(
-	"B4", //
+	"B", //
+	4,
 	"../assets/images/B4_treble_clef.svg",
 	"treble"
 );
 const C5 = new Note(
-	"C5", //
+	"C", //
+	5,
 	"../assets/images/C5_treble_clef.svg",
 	"treble"
 );
 const D5 = new Note(
-	"D5", //
+	"D", //
+	5,
 	"../assets/images/D5_treble_clef.svg",
 	"treble"
 );
 const E5 = new Note(
-	"E5", //
+	"E", //
+	5,
 	"../assets/images/E5_treble_clef.svg",
 	"treble"
 );
 const F5 = new Note(
-	"F5", //
+	"F", //
+	5,
 	"../assets/images/F5_treble_clef.svg",
 	"treble"
 );
 const G5 = new Note(
-	"G5", //
+	"G", //
+	5,
 	"../assets/images/G5_treble_clef.svg",
 	"treble"
 );
