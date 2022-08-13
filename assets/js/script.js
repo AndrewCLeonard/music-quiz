@@ -3,6 +3,7 @@
 const noteLetters = ["A", "B", "C", "D", "E", "F", "G"];
 
 const startGameBtn = document.getElementById("start-game-btn");
+const staffImagesDivEl = document.getElementById("staff-images");
 
 /**
  * CREATE BUTTONS
@@ -65,9 +66,9 @@ timerId.innerText = startingTime;
 // variable to store countdownID, necessary for `clearInterval()`
 let countdown;
 
-function decrementTimer() {
+function startGame() {
 	countdown = setInterval(timer, 1000);
-	removeStartButton();
+	startGameBtn.remove();
 }
 
 function timer() {
@@ -81,16 +82,9 @@ function timer() {
 	}
 }
 
-// START GAME LOGIC
+/**
+ * GAME LOGIC
+ */
 
-// remove start game button from DOM
-function removeStartButton() {
-	startGameBtn.remove();
-}
-
-// show pictures for the quiz
-
-function startGame() {}
-
-startGameBtn.addEventListener("click", decrementTimer, false);
+startGameBtn.addEventListener("click", startGame, false);
 noteButtonDivEl.addEventListener("click", userSelectedAnswer);
