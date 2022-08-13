@@ -1,4 +1,6 @@
-// import no-tesObject from "./noteData.js";
+import notesObject from "./noteData.js";
+// `getRndInteger(min, max)` returns random number between min and max (both included)
+import getRndInteger from "./utilities.js";
 
 const noteLetters = ["A", "B", "C", "D", "E", "F", "G"];
 
@@ -31,14 +33,6 @@ function userSelectedAnswer(e) {
 		const noteName = e.target.getAttribute("data-note");
 		console.log(noteName);
 	}
-	// console.log(isNoteButton);
-	// console.log(e.hasAttribute("data-note"));
-	// check if the clicked area of the noteButtonDivEl has data attribute
-
-	// if (isNoteButton) {
-	// 	const noteButton = noteButtonDivEl.getAttribute("data-note");
-	// 	console.log(noteButton);
-	// }
 }
 
 /**
@@ -86,5 +80,29 @@ function timer() {
  * GAME LOGIC
  */
 
+// hardcoding this for now:
+const selectedNotesArray = notesObject.staffNotes;
+const notesArrayLength = selectedNotesArray.length;
+
+// select random element from `notesObject.staffNotes`
+function selectRandomObjectFromArray(selectedNotesArray) {
+	// choose random index for image
+	let randomNum = getRndInteger(0, notesArrayLength);
+	console.log(`array length = ${notesArrayLength}, \`randomNum\` = ${randomNum}`);
+	let selectedImage = selectedNotesArray[randomNum].image;
+	console.log(selectedImage);
+
+	// append selected image to DOM
+	const newImg = document.createElement("img");
+	newImg.setAttribute("src", selectedImage);
+	newImg.classList.add("staff-images");
+	staffImagesDivEl.appendChild(newImg);
+}
+
+selectRandomObjectFromArray(selectedNotesArray);
+
+/**
+ * EVENT LISTENERS
+ */
 startGameBtn.addEventListener("click", startGame, false);
 noteButtonDivEl.addEventListener("click", userSelectedAnswer);

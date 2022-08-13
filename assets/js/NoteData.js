@@ -114,6 +114,8 @@ notesObject.allNotes.forEach((note) => {
 	notesObject.allNotes.fullNoteName = note.name + note.octave;
 });
 
+export default notesObject;
+
 /**
  * QUESTIONS
  * 
@@ -126,5 +128,4 @@ notesObject.allNotes.forEach((note) => {
 		console.log(noteObject);
 	}
 	
-	export default notesObject;
 	*/

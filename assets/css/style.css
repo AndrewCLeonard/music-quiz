@@ -9,6 +9,8 @@
 
 .main-content {
 	display: flex;
+	max-width: 600px;
+	align-items: center;
 }
 
 .quiz-elements {
@@ -19,7 +21,7 @@
 
 /* div containing the staff images */
 .staff-images {
-	/* min-width: 200px; */
+	min-width: 200px;
 }
 
 /* div containing note buttons */
@@ -31,8 +33,10 @@
 }
 
 .staff-image {
-	/* width: 10rem; */
-	/* max-height: auto; */
+	min-width: 10rem;
+	min-height: auto;
+	float: right;
+	clear: right;
 }
 
 /* div containing the note buttons */
