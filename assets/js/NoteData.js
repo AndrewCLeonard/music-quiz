@@ -114,12 +114,17 @@ notesObject.allNotes.forEach((note) => {
 	notesObject.allNotes.fullNoteName = note.name + note.octave;
 });
 
-// notesObject.forEach((noteObject) => {
-// 	console.log(noteObject);
-// });
-
-for (const noteObject in notesObject.staffNotes) {
-	console.log(noteObject);
-}
-
-export default notesObject;
+/**
+ * QUESTIONS
+ * 
+ * Why do these console.log statements differ?  
+ notesObject.staffNotes.forEach((noteObject) => {
+	 console.log(noteObject);
+	});
+	
+	for (const noteObject in notesObject.staffNotes) {
+		console.log(noteObject);
+	}
+	
+	export default notesObject;
+	*/

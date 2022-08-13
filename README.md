@@ -50,16 +50,43 @@ _Given I am taking a music quiz..._
 
 ## Questions:
 
-### `setInterval` with `while` loops
+### Loop Questions
 
-Why doesn't this work for decremeting the timer:
+-   `for`
+-   `while`,
+-   `for...in`,
+-   `for...each`
+-   and `map`...
+
+have different use cases and return different results.
+
+1. When to use one or the other?
+2. See bottom of `noteData.js` for an example
+
+---
+
+### Event Listener
+
+Why does using a template literal on a const change the `console.log` return?
+
+in event listener callback:
+this code...
 
 ```
-function secondCountdown(startingTime) {
-	while (startingTime > 0) {
-		startingTime -= 1;
-		console.log(startingTime);
-		return startingTime;
-	}
-}
+	const targetEl = e.target;
+	console.log(`${targetEl}`);
+
 ```
+
+returns:
+`[object HTMLButtonElement]`
+
+this code...
+
+```
+	const targetEl = e.target;
+	console.log(targetEl);
+```
+
+returns:
+`<button class="note-button" data-note="A">`

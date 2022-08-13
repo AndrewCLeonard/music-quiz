@@ -24,9 +24,10 @@
 
 /* div containing note buttons */
 .note-buttons {
-	/* these don't do anything: */
-	/* display: flex; */
-	/* flex-wrap: wrap; */
+}
+
+/* note buttons themselves */
+.note-button {
 }
 
 .staff-image {
