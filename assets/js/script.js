@@ -4,6 +4,13 @@ import getRndInteger from "./utilities.js";
 
 const noteLetters = ["A", "B", "C", "D", "E", "F", "G"];
 
+/**
+ * HEADER ELEMENTS
+ */
+
+// "view high scores" element
+const highScoreEl = document.querySelector(".view-high-scores");
+
 const startGameBtn = document.getElementById("start-game-btn");
 const staffImagesDivEl = document.getElementById("staff-images");
 
@@ -36,13 +43,8 @@ function userSelectedAnswer(e) {
 }
 
 /**
- * HEADER ELEMENTS
+ * TIMER ELEMENTS
  */
-
-// "view high scores" element
-const highScoreEl = document.querySelector(".view-high-scores");
-
-// timer elements
 
 // class for the div containing the entire timer
 const timerEl = document.querySelector(".timerEl");
@@ -63,6 +65,7 @@ let countdown;
 function startGame() {
 	countdown = setInterval(timer, 1000);
 	startGameBtn.remove();
+	selectRandomObjectFromArray(selectedNotesArray);
 }
 
 function timer() {
@@ -86,11 +89,11 @@ const notesArrayLength = selectedNotesArray.length;
 
 // select random element from `notesObject.staffNotes`
 function selectRandomObjectFromArray(selectedNotesArray) {
+	const activeArray = selectedNotesArray;
 	// choose random index for image
 	let randomNum = getRndInteger(0, notesArrayLength);
 	console.log(`array length = ${notesArrayLength}, \`randomNum\` = ${randomNum}`);
 	let selectedImage = selectedNotesArray[randomNum].image;
-	console.log(selectedImage);
 
 	// append selected image to DOM
 	const newImg = document.createElement("img");
@@ -98,8 +101,6 @@ function selectRandomObjectFromArray(selectedNotesArray) {
 	newImg.classList.add("staff-images");
 	staffImagesDivEl.appendChild(newImg);
 }
-
-selectRandomObjectFromArray(selectedNotesArray);
 
 /**
  * EVENT LISTENERS
