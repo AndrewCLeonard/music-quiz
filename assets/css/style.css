@@ -10,7 +10,6 @@
 .main-content {
 	display: flex;
 	max-width: 600px;
-	align-items: center;
 }
 
 .quiz-elements {

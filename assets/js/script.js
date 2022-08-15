@@ -34,14 +34,6 @@ noteLetters.forEach((note) => {
 	// const noteId = buttonEl.getAttribute("data-note");
 });
 
-function userSelectedAnswer(e) {
-	// const isNoteButton = noteButtonDivEl.hasAttribute("note-button");
-	if (e.target.matches(".note-button")) {
-		const noteName = e.target.getAttribute("data-note");
-		console.log(noteName);
-	}
-}
-
 /**
  * TIMER ELEMENTS
  */
@@ -56,7 +48,9 @@ const timerId = document.getElementById("timer");
  * TIMER CODE
  */
 
-let startingTime = 30;
+let startingTime = 2;
+let amountOfTimeToAddForCorrectResponse = 2;
+let amountOfTimeToSubtractForIncorrectResponse = 2;
 timerId.innerText = startingTime;
 
 // variable to store countdownID, necessary for `clearInterval()`
@@ -70,7 +64,7 @@ function startGame() {
 
 function timer() {
 	if (startingTime >= 1) {
-		console.log(startingTime);
+		// console.log(startingTime);
 		startingTime -= 1;
 		timerId.innerText = startingTime;
 	} else if (startingTime === 0) {
@@ -81,26 +75,79 @@ function timer() {
 
 /**
  * GAME LOGIC
- */
+ * */
 
-// hardcoding this for now:
+// hardcoding this for now...
 const selectedNotesArray = notesObject.staffNotes;
+
+// used to generate the "max" for `getRndInteger
 const notesArrayLength = selectedNotesArray.length;
+
+// declaring global variables
+let selectedObject;
+let selectedImage;
+let selectedNoteName;
+let randomNum;
+
+// for storing (and eventually logging) correct/incorrect responses
+let incorrectAnswersArray = [];
+let correctAnswersArray = [];
 
 // select random element from `notesObject.staffNotes`
 function selectRandomObjectFromArray(selectedNotesArray) {
-	const activeArray = selectedNotesArray;
 	// choose random index for image
-	let randomNum = getRndInteger(0, notesArrayLength);
-	console.log(`array length = ${notesArrayLength}, \`randomNum\` = ${randomNum}`);
-	let selectedImage = selectedNotesArray[randomNum].image;
+	randomNum = getRndInteger(0, notesArrayLength);
+	selectedObject = selectedNotesArray[randomNum];
+	selectedImage = selectedNotesArray[randomNum].image;
+	selectedNoteName = selectedNotesArray[randomNum].name;
 
 	// append selected image to DOM
 	const newImg = document.createElement("img");
 	newImg.setAttribute("src", selectedImage);
 	newImg.classList.add("staff-images");
 	staffImagesDivEl.appendChild(newImg);
+	console.log(`first image: ${selectedNoteName}, ${selectedImage}`);
+	console.log(selectedObject);
 }
+
+// for removing object from array after in/correct answers:
+function checkArray(object, index, array) {
+	const objectToRemove = object[randomNum];
+	return objectToRemove;
+}
+
+function userSelectedAnswer(e) {
+	const noteName = e.target.getAttribute("data-note");
+	console.log(`first image in "userSelectedAnswer": ${selectedNoteName}, ${selectedImage}`);
+
+	// check if selectedNoteName (picture) and noteName (button's note name) match for correct response
+	if (e.target.matches(".note-button") && selectedNoteName === noteName) {
+		// USER WAS CORRECT
+		console.log("correct response");
+		// add time
+		startingTime += amountOfTimeToAddForCorrectResponse;
+
+		// get correct response element from `noteLetters` array, add it to `correctAnswersArray`.
+		// 1. get index of randomly chosen element
+		const correctIndexToCopy = noteLetters.indexOf(noteName);
+		// 2. add the correct answer to `correctAnswersArray`
+		correctAnswersArray.push(correctIndexToCopy);
+		// 4. remove correct response from `selectedNotesArray`
+	}
+	// user was incorrect
+	else console.log("wrong response");
+	startingTime -= amountOfTimeToSubtractForIncorrectResponse;
+	// add the mistake to the incorrectAnswersArray
+}
+
+/**
+ * END LOGIC
+ */
+
+// reset arrays
+// reset `noteLetters`
+
+// reset button
 
 /**
  * EVENT LISTENERS
