@@ -34,7 +34,6 @@ const C4 = new Note(
 	"C", //
 	4,
 	"../assets/images/C4_treble_clef.svg",
-	5,
 	"treble"
 );
 const D4 = new Note(
