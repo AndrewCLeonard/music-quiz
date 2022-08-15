@@ -81,44 +81,41 @@ function timer() {
 const selectedNotesArray = notesObject.staffNotes;
 
 // used to generate the "max" for `getRndInteger
-const notesArrayLength = selectedNotesArray.length;
 
 // declaring global variables
 let selectedObject;
 let selectedImage;
 let selectedNoteName;
 let randomNum;
-
-// for storing (and eventually logging) correct/incorrect responses
-let incorrectAnswersArray = [];
-let correctAnswersArray = [];
+let newImg;
 
 // select random element from `notesObject.staffNotes`
 function selectRandomObjectFromArray(selectedNotesArray) {
+	const notesArrayLength = selectedNotesArray.length;
 	// choose random index for image
+	console.log(`notesArrayLength = ${notesArrayLength}`);
 	randomNum = getRndInteger(0, notesArrayLength);
+	console.log(randomNum);
+	console.log(selectedNotesArray);
 	selectedObject = selectedNotesArray[randomNum];
 	selectedImage = selectedNotesArray[randomNum].image;
 	selectedNoteName = selectedNotesArray[randomNum].name;
 
 	// append selected image to DOM
-	const newImg = document.createElement("img");
+	newImg = document.createElement("img");
 	newImg.setAttribute("src", selectedImage);
 	newImg.classList.add("staff-images");
 	staffImagesDivEl.appendChild(newImg);
-	console.log(`first image: ${selectedNoteName}, ${selectedImage}`);
-	console.log(selectedObject);
+	console.log(`${selectedNoteName}, ${selectedImage}`);
 }
 
 // for removing object from array after in/correct answers:
-function checkArray(object, index, array) {
-	const objectToRemove = object[randomNum];
-	return objectToRemove;
+function isCorrectNote(element, index, array) {
+	return element === selectedNoteName;
 }
 
 function userSelectedAnswer(e) {
 	const noteName = e.target.getAttribute("data-note");
-	console.log(`first image in "userSelectedAnswer": ${selectedNoteName}, ${selectedImage}`);
 
 	// check if selectedNoteName (picture) and noteName (button's note name) match for correct response
 	if (e.target.matches(".note-button") && selectedNoteName === noteName) {
@@ -127,12 +124,10 @@ function userSelectedAnswer(e) {
 		// add time
 		startingTime += amountOfTimeToAddForCorrectResponse;
 
-		// get correct response element from `noteLetters` array, add it to `correctAnswersArray`.
-		// 1. get index of randomly chosen element
-		const correctIndexToCopy = noteLetters.indexOf(noteName);
-		// 2. add the correct answer to `correctAnswersArray`
-		correctAnswersArray.push(correctIndexToCopy);
-		// 4. remove correct response from `selectedNotesArray`
+		// splice out correctly answered object from `selectedNotesArray
+		selectedNotesArray.splice(randomNum, 1);
+		newImg.remove();
+		selectRandomObjectFromArray(selectedNotesArray);
 	}
 	// user was incorrect
 	else console.log("wrong response");
