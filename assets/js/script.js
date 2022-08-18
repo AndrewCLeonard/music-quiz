@@ -57,6 +57,7 @@ timerId.innerText = startingTime;
 let countdown;
 
 function startGame() {
+	console.log("======================== startGame ===================================");
 	countdown = setInterval(timer, 1000);
 	startGameBtn.remove();
 	selectRandomObjectFromArray(selectedNotesArray);
@@ -78,8 +79,10 @@ function timer() {
  * */
 
 // hardcoding this for now...
-let selectedNotesArray = notesObject.belowStaffNotes;
-
+// ??? spread operator not necessary here?
+let selectedNotesArray = [...notesObject.belowStaffNotes];
+console.log("`selectedNotesArray`:");
+console.table(selectedNotesArray);
 // used to generate the "max" for `getRndInteger
 
 // declaring global variables
@@ -90,73 +93,96 @@ let randomNum;
 let newImg;
 let incorrectAnswersArray = [];
 let activeArray = [];
+let splice;
+let currentArray;
 
 // select random object from chosen array (hardcoded for now as `notesObject.belowStaffNotes`)
-function selectRandomObjectFromArray(selectedNotesArray) {
-	console.log(`current array length = ${activeArray.length}`);
-	// ensure that there are still objects in the array
-	if (selectedNotesArray.length > 0) {
-		// if so, choose random index for image
-		activeArray = selectedNotesArray;
-		randomNum = getRndInteger(0, selectedNotesArray.length);
-		// console.log(`randomNum = ${randomNum}`);
-		// console.table(selectedNotesArray);
-		selectedObject = selectedNotesArray[randomNum];
-		selectedImage = selectedNotesArray[randomNum].image;
-		selectedNoteName = selectedNotesArray[randomNum].name;
+function selectRandomObjectFromArray(currentArray) {
+	console.log("======================== selectRandomObjectFromArray ===================================");
+	console.log("currentArray:");
+	console.table(currentArray);
+	// selcet a random number to choose random object from currentArray & also get its properties
+	randomNum = getRndInteger(0, currentArray.length);
+	selectedObject = currentArray[randomNum];
+	selectedImage = currentArray[randomNum].image;
+	selectedNoteName = currentArray[randomNum].name;
 
-		// append selected image to DOM
-		newImg = document.createElement("img");
-		newImg.setAttribute("src", selectedImage);
-		newImg.classList.add("staff-images");
-		staffImagesDivEl.appendChild(newImg);
-		// console.log(`selected note = ${selectedNoteName}`);
-	} else if (incorrectAnswersArray.length > 0) {
-		console.log("selectedNotesArray empty, moving to incorrectAnswersArray:");
-		activeArray = incorrectAnswersArray;
-		console.log(`incorrectAnswersArray:`);
-		console.table(incorrectAnswersArray);
-		console.log(`activeArray:`);
-		console.table(activeArray);
-		// console.table(incorrectAnswersArray);
-		selectRandomObjectFromArray(activeArray);
-	} else if ((activeArray = 0)) {
-		console.log("arrays are empty");
-	}
-	// if array is now empty
-	else console.log(activeArray);
+	// append selected image to DOM
+	newImg = document.createElement("img");
+	newImg.setAttribute("src", selectedImage);
+	newImg.classList.add("staff-images");
+	staffImagesDivEl.appendChild(newImg);
+
+	// splice out the randomly chosen object
+	console.log("selectedObject spliced out:");
+	splice = currentArray.splice(randomNum, 1);
+	console.log("splice:");
+	console.table(splice);
+	console.log("currentArray should now be one shorter:");
+	console.table(currentArray);
+	console.log("selectedNotesArray should now be one shorter?");
+	console.table(selectedNotesArray);
+	console.log("======================== selectRandomObjectFromArray END ===================================");
 }
-JSON.st;
-// for removing object from array after in/correct answers:
-function isCorrectNote(element, index, array) {
-	return element === selectedNoteName;
+
+function answerResponseHandler(chosenArray) {
+	console.log("response handler");
 }
 
 function userSelectedAnswer(e) {
-	if (selectedNotesArray.length > 0) {
-		selectedNotesArray = activeArray;
-		console.log("selectedNotesArray being used");
-	} else if (incorrectAnswersArray > 0) {
-		incorrectAnswersArray = activeArray;
-		console.log("incorrectAnswersArray being used");
-	} else console.log("el fin");
+	// if originally chosen array has length > 0, use that. Otherwise select randomly from the incorrect response array
+	console.log("======================== userSelectedAnswer ===================================");
+	console.table(selectedNotesArray);
 
+	// if a case evaluates to "true", it will execute
+	switch (true) {
+		case selectedNotesArray.length > 0:
+			answerResponseHandler(selectedNotesArray);
+			break;
+		case incorrectAnswersArray.legth > 0:
+			answerResponseHandler(incorrectAnswersArray);
+			break;
+		default:
+			console.log(selectedNotesArray.length);
+			console.log("This is the default in the switch statement");
+	}
+
+	// if (selectedNotesArray.length) {
+	// 	console.log("selectedNotesArray has length, tables should be same:");
+	// 	activeArray = [...selectedNotesArray];
+	// 	console.table(selectedNotesArray);
+	// 	console.table(activeArray);
+	// } else if (incorrectAnswersArray.length) {
+	// 	console.log("incorrectAnswersArray has length");
+	// 	activeArray = [...incorrectAnswersArray];
+	// } else {
+	// 	console.log("arrays empty, code for ending logic needs to be written.");
+	// 	console.log("selectedNotesArray:");
+	// 	console.table(selectedNotesArray);
+	// 	console.log("activeArray:");
+	// 	console.table(activeArray);
+	// }
 	const noteName = e.target.getAttribute("data-note");
+
+	// USER WAS CORRECT
 	// check if selectedNoteName (from displayed image) and noteName (button's note name) match for correct response
 	if (e.target.matches(".note-button") && selectedNoteName === noteName) {
-		// USER WAS CORRECT
-		console.log("correct response");
+		console.log("correct response:");
 		// add time
 		startingTime += amountOfTimeToAddForCorrectResponse;
 
-		// splice out correctly answered object from `selectedNotesArray
-		activeArray.splice(randomNum, 1);
 		newImg.remove();
-		console.log(`array length from userSelectedAnswer ` + activeArray.length);
-		selectRandomObjectFromArray(activeArray);
+		if (activeArray.length) {
+			console.log(`activeArray.length = ${activeArray.length}`);
+			selectRandomObjectFromArray(activeArray);
+		}
+		console.log("out of objects");
+		console.log(`activeArray.length = ${activeArray.length}`);
 	}
 	// user was incorrect
 	else if (e.target.matches(".note-button") && selectedNoteName != noteName) {
+		console.log("userSelectedAnswer user incorrect `else if`");
+
 		console.log("wrong response");
 		// remove 2 seconds from their timer
 		startingTime -= amountOfTimeToSubtractForIncorrectResponse;
@@ -170,6 +196,7 @@ function userSelectedAnswer(e) {
 		selectRandomObjectFromArray(activeArray);
 	}
 	// add the mistake to the incorrectAnswersArray
+	console.log("======================== userSelectedAnswer END ===================================");
 }
 
 /**
@@ -184,5 +211,6 @@ function userSelectedAnswer(e) {
 /**
  * EVENT LISTENERS
  */
+
 startGameBtn.addEventListener("click", startGame, false);
 noteButtonDivEl.addEventListener("click", userSelectedAnswer);
