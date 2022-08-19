@@ -48,7 +48,7 @@ const timerId = document.getElementById("timer");
  * TIMER CODE
  */
 
-let startingTime = 2;
+let startingTime = 50000;
 let amountOfTimeToAddForCorrectResponse = 2;
 let amountOfTimeToSubtractForIncorrectResponse = 2;
 timerId.innerText = startingTime;
@@ -58,6 +58,8 @@ let countdown;
 
 function startGame() {
 	console.log("======================== startGame ===================================");
+	console.table("selectedNotesArray:");
+	console.table(selectedNotesArray);
 	countdown = setInterval(timer, 1000);
 	startGameBtn.remove();
 	selectRandomObjectFromArray(selectedNotesArray);
@@ -65,25 +67,19 @@ function startGame() {
 
 function timer() {
 	if (startingTime >= 1) {
-		// console.log(startingTime);
+		// // console.log(startingTime);
 		startingTime -= 1;
 		timerId.innerText = startingTime;
 	} else if (startingTime === 0) {
 		timerId.innerText = startingTime;
 		clearInterval(countdown);
+		concludeGame();
 	}
 }
-
-/**
- * GAME LOGIC
- * */
 
 // hardcoding this for now...
 // ??? spread operator not necessary here?
 let selectedNotesArray = [...notesObject.belowStaffNotes];
-console.log("`selectedNotesArray`:");
-console.table(selectedNotesArray);
-// used to generate the "max" for `getRndInteger
 
 // declaring global variables
 let selectedObject;
@@ -92,15 +88,14 @@ let selectedNoteName;
 let randomNum;
 let newImg;
 let incorrectAnswersArray = [];
-let activeArray = [];
-let splice;
-let currentArray;
+let noteName;
+let buttonClick;
+let gameWillContinue = true;
+// let currentArray;
 
 // select random object from chosen array (hardcoded for now as `notesObject.belowStaffNotes`)
 function selectRandomObjectFromArray(currentArray) {
-	console.log("======================== selectRandomObjectFromArray ===================================");
-	console.log("currentArray:");
-	console.table(currentArray);
+	console.log("======================== selectRandomObjectFromArray START ===================================");
 	// selcet a random number to choose random object from currentArray & also get its properties
 	randomNum = getRndInteger(0, currentArray.length);
 	selectedObject = currentArray[randomNum];
@@ -114,94 +109,117 @@ function selectRandomObjectFromArray(currentArray) {
 	staffImagesDivEl.appendChild(newImg);
 
 	// splice out the randomly chosen object
-	console.log("selectedObject spliced out:");
-	splice = currentArray.splice(randomNum, 1);
-	console.log("splice:");
-	console.table(splice);
-	console.log("currentArray should now be one shorter:");
-	console.table(currentArray);
-	console.log("selectedNotesArray should now be one shorter?");
+	currentArray.splice(randomNum, 1);
+	console.log("selectedNotesArray should now be one shorter");
 	console.table(selectedNotesArray);
 	console.log("======================== selectRandomObjectFromArray END ===================================");
 }
 
-function answerResponseHandler(chosenArray) {
-	console.log("response handler");
+/**
+ * INCORRECT RESPONSES
+ */
+
+function incorrectResponseHandler(object) {
+	console.log("======================== incorrectResponseHandler START ===================================");
+	incorrectAnswersArray.push(selectedObject);
+	newImg.remove();
+	selectRandomObjectFromArray(selectedNotesArray);
+	console.log("======================== incorrectResponseHandler END ===================================");
 }
 
-function userSelectedAnswer(e) {
-	// if originally chosen array has length > 0, use that. Otherwise select randomly from the incorrect response array
-	console.log("======================== userSelectedAnswer ===================================");
-	console.table(selectedNotesArray);
+/**
+ * CORRECT RESPONSES
+ */
 
-	// if a case evaluates to "true", it will execute
-	switch (true) {
-		case selectedNotesArray.length > 0:
-			answerResponseHandler(selectedNotesArray);
-			break;
-		case incorrectAnswersArray.legth > 0:
-			answerResponseHandler(incorrectAnswersArray);
-			break;
-		default:
-			console.log(selectedNotesArray.length);
-			console.log("This is the default in the switch statement");
-	}
+function answerResponseHandler(chosenArray) {
+	console.log("======================== answerResponseHandler START ===================================");
 
-	// if (selectedNotesArray.length) {
-	// 	console.log("selectedNotesArray has length, tables should be same:");
-	// 	activeArray = [...selectedNotesArray];
-	// 	console.table(selectedNotesArray);
-	// 	console.table(activeArray);
-	// } else if (incorrectAnswersArray.length) {
-	// 	console.log("incorrectAnswersArray has length");
-	// 	activeArray = [...incorrectAnswersArray];
-	// } else {
-	// 	console.log("arrays empty, code for ending logic needs to be written.");
-	// 	console.log("selectedNotesArray:");
-	// 	console.table(selectedNotesArray);
-	// 	console.log("activeArray:");
-	// 	console.table(activeArray);
-	// }
-	const noteName = e.target.getAttribute("data-note");
-
-	// USER WAS CORRECT
-	// check if selectedNoteName (from displayed image) and noteName (button's note name) match for correct response
-	if (e.target.matches(".note-button") && selectedNoteName === noteName) {
-		console.log("correct response:");
+	if (buttonClick && selectedNoteName === noteName) {
+		console.log("correct response");
+		console.log("selectedNotesArray:");
+		console.table(selectedNotesArray);
 		// add time
 		startingTime += amountOfTimeToAddForCorrectResponse;
 
 		newImg.remove();
-		if (activeArray.length) {
-			console.log(`activeArray.length = ${activeArray.length}`);
-			selectRandomObjectFromArray(activeArray);
+		if (selectedNotesArray.length) {
+			selectRandomObjectFromArray(selectedNotesArray);
+		} else {
+			gameWillContinue = false;
+			console.log("out of objects");
+			console.log(`gameWillContinue = ${gameWillContinue}`);
 		}
-		console.log("out of objects");
-		console.log(`activeArray.length = ${activeArray.length}`);
-	}
-	// user was incorrect
-	else if (e.target.matches(".note-button") && selectedNoteName != noteName) {
-		console.log("userSelectedAnswer user incorrect `else if`");
 
-		console.log("wrong response");
-		// remove 2 seconds from their timer
-		startingTime -= amountOfTimeToSubtractForIncorrectResponse;
-		// add incorrect response to incorrect answers array
-		incorrectAnswersArray.push(selectedObject);
-		// remove it from selected notes array
-		activeArray.splice(randomNum, 1);
-		// remove the SVG
-		newImg.remove();
-		// randomly choose the next object to display
-		selectRandomObjectFromArray(activeArray);
+		// wrong answers
+	} else if (buttonClick && selectedNoteName !== noteName) {
+		console.log("YOU CLICKED A BUTTON BUT YOU'RE WRONG");
+		incorrectResponseHandler(selectedObject);
 	}
-	// add the mistake to the incorrectAnswersArray
-	console.log("======================== userSelectedAnswer END ===================================");
+	console.log(selectedNotesArray.length);
+	console.log("======================== answerResponseHandler END ===================================");
 }
 
+function userSelectedAnswer(e) {
+	// if originally chosen array has length > 0, use that. Otherwise select randomly from the incorrect response array
+	console.log("======================== userSelectedAnswer START===================================");
+	noteName = e.target.getAttribute("data-note");
+	e.target.matches(".note-button") ? (buttonClick = true) : (buttonClick = false);
+
+	// if one of the cases evaluates to "true", it will execute
+	switch (true) {
+		case selectedNotesArray.length > 0:
+			console.log(selectedNotesArray.length);
+			answerResponseHandler(selectedNotesArray);
+
+			console.log("======================== switch statement correct response END ===================================");
+			break;
+		case incorrectAnswersArray.length > 0:
+			console.log("TOO CLOSE FOR 'selectedNotesArray, SWITCHING TO `incorrectAnswersArray`");
+			answerResponseHandler(incorrectAnswersArray);
+			break;
+		case !gameWillContinue: // making it "false" so that it uses this case when it's false
+			console.log("gameWillContinue registered as false in switch statement.");
+			concludeGame();
+			break;
+		default:
+			incorrectAnswersArray.length > 0 ? console.log(true) : console.log(false);
+			console.log("switch statement default");
+	}
+	console.log("======================== userSelectedAnswer END ===================================");
+}
 /**
  * END LOGIC
  */
+
+function saveScore() {
+	localStorage.setItem("score", JSON.stringify(score));
+}
+
+function concludeGame() {
+	// remove picture of staff
+	newImg.remove();
+
+	// get time remaining for score
+	const timeElapsed = startingTime;
+	clearInterval(countdown);
+	console.log(`timeElapsed = ${timeElapsed}`);
+
+	// put the button back
+	const buttonHTML = `<button id="start-game-btn" class="start-game-btn"><i class="fa-solid fa-play fa-xl"></i></button>`;
+	document.getElementById("staff-images").innerHTML = buttonHTML;
+
+	/**
+	 * 	const buttonEl = document.createElement("button");
+	buttonEl.className = "note-button";
+	buttonEl.setAttribute("data-note", note);
+	buttonEl.innerText = note;
+	noteButtonDivEl.appendChild(buttonEl);
+
+	 * <div class="start-game" id="staff-images">
+					<button id="start-game-btn" class="start-game-btn"><i class="fa-solid fa-play fa-xl"></i></button>
+				
+	 */
+}
 
 // reset arrays
 // reset `noteLetters`
